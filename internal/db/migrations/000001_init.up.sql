@@ -1,7 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS customers (
-  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "id" UUID PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
   "first_name" VARCHAR(255) NOT NULL,
   "last_name" VARCHAR(255) NOT NULL,
   "phone" VARCHAR(15) NOT NULL UNIQUE,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 CREATE TABLE IF NOT EXISTS merchants (
-  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "id" UUID PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
   "active" BOOLEAN NOT NULL DEFAULT false, 
   "slug" VARCHAR(255) NOT NULL UNIQUE,
   "status" VARCHAR(255) NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS merchants (
 );
 
 CREATE TABLE IF NOT EXISTS items (
-  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
-  "merchant_id" uuid NOT NULL,
+  "id" UUID PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "merchant_id" UUID NOT NULL,
   "active" BOOLEAN NOT NULL DEFAULT false, 
   "price" FLOAT NOT NULL,
   "prev_price" FLOAT NOT NULL,
@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS items (
 );
 
 CREATE TABLE IF NOT EXISTS addresses (
-  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
-  "customer_id" uuid,
-  "merchant_id" uuid,
+  "id" UUID PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "customer_id" UUID,
+  "merchant_id" UUID,
   "lat" INT NOT NULL,
   "lng" INT NOT NULL,
   "house_number" VARCHAR(6) NOT NULL,
@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS addresses (
 );
 
 CREATE TABLE IF NOT EXISTS orders (
-  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
-  "customer_id" uuid NOT NULL,
-  "merchant_id" uuid NOT NULL,
+  "id" UUID PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "customer_id" UUID NOT NULL,
+  "merchant_id" UUID NOT NULL,
   "amount" FLOAT NOT NULL,
   "status" VARCHAR(255) NOT NULL,
   "items" JSONB NOT NULL,
