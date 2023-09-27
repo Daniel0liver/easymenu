@@ -17,3 +17,11 @@ stop_container:
 		echo "\nThere are no containers running..."; \
 	fi
  
+create_migrations:
+	migrate create -ext sql -dir internal/db/migrations -seq init
+
+migrate_up:
+	migrate -database "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable" -path internal/db/migrations up
+
+migrate_down:
+	migrate -database "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable" -path internal/db/migrations down
