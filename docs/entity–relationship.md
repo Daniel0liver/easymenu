@@ -13,12 +13,12 @@ erDiagram
   }
 
   ADDRESS {
-    uuid      ip            PK
+    uuid      id            PK
     uuid      customer_id   FK
     uuid      merchant_id   FK
     string    lat               "Latitude"
     string    lng               "Longitude"
-    string    number            "House number"
+    string    house_number      "Only 6 characters are allowed"
     string    street      
     string    city        
     string    country     
