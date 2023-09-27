@@ -71,6 +71,6 @@ CREATE TABLE IF NOT EXISTS orders (
   "payment_method" VARCHAR(255) NOT NULL,
   "created_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
-  FOREIGN KEY (merchant_id) REFERENCES merchants(id) ON DELETE CASCADE
+  FOREIGN KEY (customer_id) REFERENCES customers(id),
+  FOREIGN KEY (merchant_id) REFERENCES merchants(id)
 );
