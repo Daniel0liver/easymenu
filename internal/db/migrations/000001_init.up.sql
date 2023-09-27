@@ -27,6 +27,21 @@ CREATE TABLE IF NOT EXISTS merchants (
   "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS items (
+  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "merchant_id" uuid NOT NULL,
+  "active" BOOLEAN NOT NULL DEFAULT false, 
+  "price" FLOAT NOT NULL,
+  "prev_price" FLOAT NOT NULL,
+  "title"VARCHAR(255) NOT NULL,
+  "description" VARCHAR(255) NOT NULL,
+  "image_url" VARCHAR(255) NOT NULL,
+  "banner_url" VARCHAR(255) NOT NULL,
+  "created_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  FOREIGN KEY (merchant_id) REFERENCES merchants(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS addresses (
   "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
   "customer_id" uuid,
