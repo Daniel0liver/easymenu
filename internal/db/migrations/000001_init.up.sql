@@ -60,3 +60,17 @@ CREATE TABLE IF NOT EXISTS addresses (
   FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
   FOREIGN KEY (merchant_id) REFERENCES merchants(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS orders (
+  "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuid_generate_v4()),
+  "customer_id" uuid NOT NULL,
+  "merchant_id" uuid NOT NULL,
+  "amount" FLOAT NOT NULL,
+  "status" VARCHAR(255) NOT NULL,
+  "items" JSONB NOT NULL,
+  "payment_method" VARCHAR(255) NOT NULL,
+  "created_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+  FOREIGN KEY (merchant_id) REFERENCES merchants(id) ON DELETE CASCADE
+);
