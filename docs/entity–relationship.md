@@ -13,12 +13,12 @@ erDiagram
   }
 
   ADDRESS {
-    uuid      id            PK
-    uuid      customer_id   FK
-    uuid      merchant_id   FK
-    string    lat               "Latitude"
-    string    lng               "Longitude"
-    string    house_number      "Only 6 characters are allowed"
+    uuid      id          PK
+    uuid      customer_id FK
+    uuid      merchant_id FK
+    string    lat             "Latitude"
+    string    lng             "Longitude"
+    string    house_number    "Only 6 characters are allowed"
     string    street      
     string    city        
     string    country     
@@ -50,6 +50,7 @@ erDiagram
   ITEM {
     uuid      id            PK
     uuid      merchant_id   FK
+    uuid      category_id   FK
     boolean   active            "When true, the item must be visible to users"
     float     price 
     float     prev_price        "It's used for promotional pricing"
@@ -64,10 +65,12 @@ erDiagram
 
   ORDER {
     uuid      id             PK
-    uuid      payment_id     FK
     uuid      customer_id    FK
     uuid      merchant_id    FK
-    float     amount             "It's the total amount of all items + merchant delivery fee"
+    uuid      payment_id     FK
+    float     toal_price         "It's the total price of all items + merchant delivery fee"
+    float     total_paid
+    total     total_return
     string    status             "PENDING, ACCEPTED, COOKING, SHIPPED, DELIVERED or CANCELED"
     jsonb     items              "It's a binary JSON with a list of chosen items"
     string    payment_method 
@@ -75,11 +78,28 @@ erDiagram
     timestamp updated_at
   }
 
-  MERCHANT  ||--o{  ITEM:     contains
-  MERCHANT  |o--||  ADDRESS:  contains
-  CUSTOMER  ||--o{  ORDER:    contains
-  ITEM      }|--o{  ORDER:    contains
-  MERCHANT  ||--o{  ORDER:    contains
-  CUSTOMER  |o--|{  ADDRESS:  contains
+  PAYMENT {
+    uuid      id           PK
+    string    name
+    string    type
+    string    logo
+    timestamp created_at
+    timestamp updated_at
+  }
 
+  ITEM_CATEGORY {
+    uuid      id             PK
+    string    name
+    timestamp created_at
+    timestamp updated_at
+  }
+
+  MERCHANT  ||--o{  ITEM:           contains
+  MERCHANT  ||--||  ADDRESS:        contains
+  CUSTOMER  ||--o{  ORDER:          contains
+  PAYMENT   ||--o{  ORDER:          contains      
+  ITEM      }|--o{  ORDER:          contains
+  MERCHANT  ||--o{  ORDER:          contains
+  CUSTOMER  ||--|{  ADDRESS:        contains
+  ITEM      }|--||  ITEM_CATEGORY:  contains
 ```
