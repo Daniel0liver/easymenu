@@ -1,13 +1,13 @@
 include .env
 
 run: build 
-	./${BINARY}
+	./bin/${BINARY}
 
 stop:
-	@-pkill -SIGTERM -f "./${BINARY}"
+	@-pkill -SIGTERM -f "./bin/${BINARY}"
 
 build:
-	go build -o ${BINARY} cmd/server/*.go
+	go build -o ./bin/${BINARY} cmd/server/*.go
 
 create_db:
 	docker exec -it ${DB_DOCKER_CONTAINER} createdb --username=${DB_USER} --owner=${DB_USER} ${DB_NAME}

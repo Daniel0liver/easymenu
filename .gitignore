@@ -7,7 +7,7 @@
 *.dll
 *.so
 *.dylib
-easymenu_api
+bin/*
 
 # Test binary
 *.test
