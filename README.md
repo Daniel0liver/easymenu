@@ -1,7 +1,7 @@
 # easymenu
 Easymenu is just an online menu that allows merchants to manage their orders more easily.
 
-> It's not ready for production use yet, maybe it never will be. iFood, please don't fire me ;)
+> It's not ready for production use yet, maybe it never will be.
 
 ## Docs
 I'm using Mermaidjs to create diagrams. If you're interested in the syntax and possibilities, check out their official [documentation](https://mermaid.js.org/intro/).
